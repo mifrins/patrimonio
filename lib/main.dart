@@ -4,12 +4,14 @@ import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
+import 'patrimonio.dart';
+
 void main() {
-  runApp(const Patrimonio());
+  runApp(const App());
 }
 
-class Patrimonio extends StatelessWidget {
-  const Patrimonio({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -86,9 +88,9 @@ class _Pagina1State extends State<_Pagina1> {
 					QrImageView(
 									data: textoQrCode.text,
 									version: QrVersions.auto,
-									size: 210,
+									size: 110,
 									gapless: true,
-									errorCorrectionLevel: QrErrorCorrectLevel.M
+									errorCorrectionLevel: QrErrorCorrectLevel.L
 					),
 
 					SizedBox(height: 20,),   
@@ -103,9 +105,10 @@ class _Pagina1State extends State<_Pagina1> {
 							child: TextField(
 									decoration: const InputDecoration(
 											border: UnderlineInputBorder(),
-											labelText: "Conteudo do QR Code"
+											labelText: "Conteúdo do QR Code"
 									),
 									controller: textoQrCode,
+                                    maxLength: 53,
 									)
 							),
 
