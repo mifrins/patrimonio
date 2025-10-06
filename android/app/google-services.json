@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "55236335981",
+    "project_id": "patrimonio-9b669",
+    "storage_bucket": "patrimonio-9b669.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55236335981:android:282f2f071a6e05df22a264",
+        "android_client_info": {
+          "package_name": "com.example.patrimonio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6L_WAiTi7LaKH_XQ9gZF8wuHLSNBzIjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
