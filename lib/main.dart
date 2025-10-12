@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:patrimonio/firebase_options.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'patrimonio.dart';
-import "paginas principais/pagina_1.dart";
-import "paginas principais/pagina_2.dart";
-import "paginas principais/pagina_3.dart";
+import 'paginas principais/pagina_1.dart';
+import 'paginas principais/pagina_2.dart';
+import 'paginas principais/pagina_3.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +38,11 @@ class PaginaInicial extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+
+        appBar: AppBar(
+            title: const Text('Patrimônio Coltec', style: TextStyle(color:Colors.black),),
+            backgroundColor: const Color(0xFF018B7B),
+        ),
 
         body: TabBarView(
           children: [

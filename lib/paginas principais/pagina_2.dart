@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class Pagina2 extends StatelessWidget {
+  const Pagina2 ({super.key});
+  
   @override
   Widget build(BuildContext context) {
     return MobileScanner(
       onDetect: (informacao) {
-        print(informacao.barcodes.first.rawValue);
         showDialog(
           context: context, 
           builder: (BuildContext context) => AlertDialog(
