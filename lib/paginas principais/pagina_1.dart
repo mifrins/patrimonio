@@ -42,27 +42,27 @@ class Pagina1State extends State<Pagina1> {
 					SizedBox(height: 20,),   
 
 					Row(
-					mainAxisAlignment: MainAxisAlignment.center,
-					children: [
-							
-							SizedBox(
-							width: 180,
-							height: 60,
-							child: TextField(
-									decoration: const InputDecoration(
-											border: UnderlineInputBorder(),
-											labelText: "Conteúdo do QR Code"
-									),
-									controller: textoQrCode,
-                                    maxLength: 53,
-									)
-							),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+                
+                SizedBox(
+                  width: 180,
+                  height: 60,
+                  child: TextField(
+                    decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: "Conteúdo do QR Code"
+                    ),
+                    controller: textoQrCode,
+                    maxLength: 53,
+                  )
+                ),
 
-							ElevatedButton(
-							onPressed: _atualizarQrCode,
-							child: Text('Gerar QR')
-							),
-					],
+                ElevatedButton(
+                  onPressed: _atualizarQrCode,
+                  child: Text('Gerar QR')
+                ),
+            ],
 					)
 			],
     );

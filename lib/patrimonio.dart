@@ -26,4 +26,18 @@ class Patrimonio {
     required this.sp,
     this.descricaoQr = "",
   });
+
+  Map<String, dynamic> paraMap(){
+    return {
+      'nPatrimonio': nPatrimonio,
+      'descricaoDoItem': descricaoDoItem,
+      'tr': tr,
+      'conservacao': conservacao,
+      'valorBem': valorBem,
+      'oc': oc,
+      'qb': qb,
+      'ne': ne,
+      'sp': sp,
+    };
+  }
 }
