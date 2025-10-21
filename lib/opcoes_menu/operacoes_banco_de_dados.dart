@@ -13,9 +13,40 @@ Future<List<String>> listarSalas() async{
   for (var documento in querySnapshot.docs){
     salas.add(documento.id);
   }
-
   return salas;
 }
+
+Future<List<Patrimonio>> listarPatrimonios(String sala) async{
+  List<Patrimonio> patrimonios = [];
+
+  // Pegar referência do banco de dados
+  FirebaseFirestore bd = FirebaseFirestore.instance;
+
+  // Obter todos documentos na coleção da sala escolhida, e usar elas por meio da variável querySnapshot
+  QuerySnapshot querySnapshot = await  bd.collection(sala).get();
+
+  for (var documento in querySnapshot.docs){
+    patrimonios.add(Patrimonio.deMapa(documento.data() as Map<String, dynamic>));
+  }
+  return patrimonios;
+}
+
+Future<List<String>> listarTodosPatrimonios() async{
+  List<String> patrimonios = [];
+
+  FirebaseFirestore bd = FirebaseFirestore.instance;
+
+  for (var sala in await listarSalas()){
+    QuerySnapshot querySnapshot = await  bd.collection(sala).get();
+
+    for (var documento in querySnapshot.docs){
+      patrimonios.add(documento.id);
+    }
+  }
+
+  return patrimonios;
+}
+
 
 void criarSala(){
   // Criar documento listando a sala na coleção "salas"

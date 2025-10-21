@@ -19,7 +19,7 @@ class _OpcaoMenu extends StatelessWidget{
             fixedSize: WidgetStateProperty.all<Size>(Size(MediaQuery.sizeOf(context).width - 40, 80)),
             shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
           ),
-          child: Text(texto, style: TextStyle(color:Colors.black, fontSize: 20)),
+          child: Text(texto, style: TextStyle( fontSize: 20)),
         ),
         SizedBox(height: 7),   
       ]

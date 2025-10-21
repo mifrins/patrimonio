@@ -1,23 +1,58 @@
-import 'package:flutter/material.dart';
-
+part of 'novo_processo.dart';
 
 class CampoTexto extends StatelessWidget{
   final String nome;
   final TextEditingController controlador;
-  const CampoTexto({super.key, required this.nome, required this.controlador});
+  final String? Function(String?)? validacao;
+  const CampoTexto({super.key, required this.nome, required this.controlador, required this.validacao});
+
+  static String? checarVazio(String? texto){
+    if(texto == ''){
+       return 'Campo deve ser preenchido.';
+    }
+    return null;
+  }
+
+  static String? checarNPatrimonio(String? texto){
+    if(texto == ''){
+       return 'Campo deve ser preenchido.';
+    }
+    return null;
+  }
+
+/*   static String? checarSalaExistente(String? texto){
+
+    if(texto == ''){
+       return 'Campo deve ser preenchido.';
+    }
+
+    if(listarSalas().then((listaDeSalas){
+      if(listaDeSalas.contains(texto)){
+        return true;
+      }else{
+        return false;
+      }
+    })){
+      return 'Sala não existente.';
+    }
+  
+    return null;
+  } */
+
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.sizeOf(context).width - 30,
-      height: 60,
+      height: 75,
       child:
-        TextField(
+        TextFormField(
           decoration: InputDecoration(
             labelText: nome,
             filled: true,
           ),
           controller: controlador,
+          validator: validacao,
         )
     );
   }
@@ -66,11 +101,12 @@ class BotaoEnviar extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return FilledButton(
-      child: Text("Enviar"),
       onPressed: funcao,
       style: ButtonStyle(
         fixedSize: WidgetStateProperty.all<Size>(Size(90, 60)),
       ),
+      child: Text("Enviar"),
     );
   }
 }
+

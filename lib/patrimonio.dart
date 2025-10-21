@@ -38,6 +38,22 @@ class Patrimonio {
       'qb': qb,
       'ne': ne,
       'sp': sp,
+      'descricaoQr': descricaoQr
     };
+  }
+
+  factory Patrimonio.deMapa(Map<String, dynamic> mapa) {
+    return Patrimonio(
+      nPatrimonio: mapa['nPatrimonio'],
+      descricaoDoItem: mapa['descricaoDoItem'],
+      tr: mapa['tr'],
+      conservacao: mapa['conservacao'],
+      valorBem: mapa['valorBem'],
+      oc: mapa['oc'],
+      qb: mapa['qb'],
+      ne: mapa['ne'],
+      sp: mapa['sp'],
+      descricaoQr: mapa['descricaoQr'],
+    );
   }
 }

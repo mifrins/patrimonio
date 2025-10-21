@@ -1,40 +1,125 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/rendering.dart';
+import 'operacoes_banco_de_dados.dart';
 
-class CatalogoPatrimonios extends StatelessWidget {
+
+class _Sala extends StatefulWidget{
+  final String nome;
+  const _Sala({required this.nome});
+
+  @override
+  State<_Sala> createState() => _SalaState();
+}
+
+class _SalaState extends State<_Sala> {
+  bool aberto = false;
+  IconData? iconeDropDown;
+  
+  Widget? tabelaPatrimonios;
+  List<DataRow> linhasTabela = [];  
+
+  @override
+  Widget build(BuildContext context) {
+    if(aberto){
+      iconeDropDown = Icons.arrow_drop_down_rounded;
+      tabelaPatrimonios = SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: DataTable(
+          columns: [
+            DataColumn(label: Expanded(child: Text('N° Patrimônio', style: TextStyle(fontStyle: FontStyle.italic)))),
+            DataColumn(label: Expanded(child: Text('Descrição do Item', style: TextStyle(fontStyle: FontStyle.italic)))),
+            DataColumn(label: Expanded(child: Text('TR', style: TextStyle(fontStyle: FontStyle.italic)))),
+            DataColumn(label: Expanded(child: Text('Conservação', style: TextStyle(fontStyle: FontStyle.italic)))),
+            DataColumn(label: Expanded(child: Text('Valor bem', style: TextStyle(fontStyle: FontStyle.italic)))),
+            DataColumn(label: Expanded(child: Text('OC', style: TextStyle(fontStyle: FontStyle.italic)))),
+            DataColumn(label: Expanded(child: Text('QB', style: TextStyle(fontStyle: FontStyle.italic)))),
+            DataColumn(label: Expanded(child: Text('NE', style: TextStyle(fontStyle: FontStyle.italic)))),
+            DataColumn(label: Expanded(child: Text('SP', style: TextStyle(fontStyle: FontStyle.italic)))),
+          ],
+          rows: linhasTabela
+        )
+      );
+    }else{
+      iconeDropDown = Icons.arrow_drop_up_rounded;
+      tabelaPatrimonios = SizedBox.shrink();
+    }
+    return Column(
+      children: [
+        TextButton(
+          onPressed: (){
+              setState((){
+                aberto = !aberto;
+                // Se estiver aberto, buscar os dados e depois reconstruir a tabela
+                if(aberto){
+                  listarPatrimonios(widget.nome).then((listaDePatrimonios){
+                    setState(() {
+                      linhasTabela.clear();
+                      for(var patrimonio in listaDePatrimonios){
+                        linhasTabela.add(
+                          DataRow(
+                            cells: [
+                              DataCell(Text(patrimonio.nPatrimonio)),
+                              DataCell(Text(patrimonio.descricaoDoItem)),
+                              DataCell(Text(patrimonio.tr)),
+                              DataCell(Text(patrimonio.conservacao)),
+                              DataCell(Text(patrimonio.valorBem.toString().replaceAll('.', ','))),
+                              DataCell(Text(patrimonio.oc.toString().replaceAll('true', 'Sim').replaceAll('false', 'Não'))),
+                              DataCell(Text(patrimonio.qb.toString().replaceAll('true', 'Sim').replaceAll('false', 'Não'))),
+                              DataCell(Text(patrimonio.ne.toString().replaceAll('true', 'Sim').replaceAll('false', 'Não'))),
+                              DataCell(Text(patrimonio.sp.toString().replaceAll('true', 'Sim').replaceAll('false', 'Não'))),
+                            ],
+                          ),
+                        );
+                      }
+                    });
+
+                  });
+                }
+              }
+            );
+          },
+          style: ButtonStyle(
+            fixedSize: WidgetStateProperty.all<Size>(Size(MediaQuery.sizeOf(context).width, 60)),
+            shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))),
+          ),
+          child: 
+            Row(children: [
+              Icon(iconeDropDown, size: 40,),
+              Text(widget.nome, style: TextStyle(color:Colors.black, fontSize: 20))
+            ],)
+        ),
+        tabelaPatrimonios!,
+        SizedBox(height: 7),
+      ]
+    );
+  }
+}
+
+class CatalogoPatrimonios extends StatefulWidget {
   const CatalogoPatrimonios({super.key});
 
-  Future<String?> readSpecificField(String collectionPath, String docId, String fieldName) async {
-    try {
-      FirebaseFirestore firestore = FirebaseFirestore.instance;
+  @override
+  State<CatalogoPatrimonios> createState() => _CatalogoPatrimoniosState();
+}
 
-      DocumentSnapshot docSnapshot = await firestore.collection(collectionPath).doc(docId).get();
+class _CatalogoPatrimoniosState extends State<CatalogoPatrimonios> {
+  List<_Sala> salas = [];
 
-      if (docSnapshot.exists) {
+  @override
+  void initState() {
+    super.initState();
+    // A tela vai começar vazia, mas vai recarregar quando a função listarSalas retornar algo
+    listarSalas().then((listaDeSalas){
+      setState(() {
+          for(var salaNome in listaDeSalas){
+            salas.add(
+              _Sala(nome: salaNome)
+            );
+          }
+      });
 
-        final dynamic fieldValue = docSnapshot.get(fieldName);
-
-        if (fieldValue != null) {
-          return fieldValue.toString();
-        } else {
-          print('Field "$fieldName" does not exist or is null in document "$docId".');
-          return null;
-        }
-      } else {
-        print('Document "$docId" does not exist in collection "$collectionPath".');
-        return null;
-      }
-    } catch (e) {
-      print("Error reading document field: $e");
-      return null;
-    }
-
-  }
-  
-
-  void _aaaaaa() async {
-    String? value = await readSpecificField("patrimônios", "hyhcmyyWQlNf5J3XhpOy", "conservacao");
-    print(value);
+    });
   }
 
   @override
@@ -42,58 +127,17 @@ class CatalogoPatrimonios extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Patrimônio Coltec', style: TextStyle(color:Colors.black),),
+          title: const Text('Catálogo de patrimônios', style: TextStyle(color:Colors.black),),
           backgroundColor: const Color(0xFF018B7B),
       ),
 
-      body: Column(
-        children: [
-          DataTable(
-            columns: const <DataColumn>[
-              DataColumn(
-                label: Expanded(
-                  child: Text('Name', style: TextStyle(fontStyle: FontStyle.italic)),
-                ),
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: Text('Age', style: TextStyle(fontStyle: FontStyle.italic)),
-                ),
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: Text('Role', style: TextStyle(fontStyle: FontStyle.italic)),
-                ),
-              ),
-            ],
-            rows: const <DataRow>[
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Sarah')),
-                  DataCell(Text('19')),
-                  DataCell(Text('Student')),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Janine')),
-                  DataCell(Text('43')),
-                  DataCell(Text('Professor')),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('27')),
-                  DataCell(Text('27')),
-                  DataCell(Text('Associate Professor')),
-                ],
-              ),
-              
-            ],
-          ),
-          ElevatedButton(onPressed: _aaaaaa, child: Text("aaaaaa"))
-        ]
-      )
+      // Configurar página para ter rolagem sem uma barra lateral
+      body:  Expanded(child: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+        child: SingleChildScrollView(child: Column(
+          children:salas
+        ))
+      ))
     );
   }
 }
