@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/rendering.dart';
 import 'operacoes_banco_de_dados.dart';
+import 'novo processo/novo_processo.dart';
 
 
-class _Sala extends StatefulWidget{
+class _SalaDropDown extends StatefulWidget{
   final String nome;
-  const _Sala({required this.nome});
+  const _SalaDropDown({required this.nome});
 
   @override
-  State<_Sala> createState() => _SalaState();
+  State<_SalaDropDown> createState() => _SalaDropDownState();
 }
 
-class _SalaState extends State<_Sala> {
+class _SalaDropDownState extends State<_SalaDropDown> {
   bool aberto = false;
   IconData? iconeDropDown;
   
@@ -69,6 +68,33 @@ class _SalaState extends State<_Sala> {
                               DataCell(Text(patrimonio.ne.toString().replaceAll('true', 'Sim').replaceAll('false', 'Não'))),
                               DataCell(Text(patrimonio.sp.toString().replaceAll('true', 'Sim').replaceAll('false', 'Não'))),
                             ],
+                            onLongPress: () => showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                title: Text(patrimonio.nPatrimonio),
+                                content: const Text('Escolha uma ação'),
+                                actions: <Widget>[
+                                  // Editar
+                                  TextButton(
+                                    onPressed: (){
+                                      Navigator.pop(context, 'Editar');
+                                      Navigator.push(context, MaterialPageRoute<void>(builder: (context) => NovoProcesso(tipoDeProcesso: 'Editar patrimônio', valorExtraSelecionado: patrimonio.nPatrimonio, fecharAposUso: true,)));
+                                    },
+                                    child: const Text('Editar'),
+                                  ),
+                                  // Apagar
+                                  TextButton(
+                                    onPressed: (){
+                                      Navigator.pop(context, 'Apagar');
+                                      Navigator.push(context, MaterialPageRoute<void>(builder: (context) => NovoProcesso(tipoDeProcesso: 'Apagar patrimônio', valorExtraSelecionado: patrimonio.nPatrimonio, fecharAposUso: true,)));
+                                    },
+                                    child: const Text('Apagar'),
+                                  ),
+                                  // Cancelar
+                                  TextButton(onPressed: () => Navigator.pop(context, 'Cancelar'), child: const Text('Cancelar')),
+                                ],
+                              ),
+                            ),
                           ),
                         );
                       }
@@ -104,7 +130,7 @@ class CatalogoPatrimonios extends StatefulWidget {
 }
 
 class _CatalogoPatrimoniosState extends State<CatalogoPatrimonios> {
-  List<_Sala> salas = [];
+  List<_SalaDropDown> salas = [];
 
   @override
   void initState() {
@@ -114,7 +140,7 @@ class _CatalogoPatrimoniosState extends State<CatalogoPatrimonios> {
       setState(() {
           for(var salaNome in listaDeSalas){
             salas.add(
-              _Sala(nome: salaNome)
+              _SalaDropDown(nome: salaNome)
             );
           }
       });

@@ -47,6 +47,39 @@ Future<List<String>> listarTodosPatrimonios() async{
   return patrimonios;
 }
 
+Future<DocumentReference<Map<String, dynamic>>?> encontrarPatrimonio(String nPatrimonio) async {
+  FirebaseFirestore bd = FirebaseFirestore.instance;
+
+  for (var sala in await listarSalas()){
+    QuerySnapshot querySnapshot = await  bd.collection(sala).get();
+
+    for (var documento in querySnapshot.docs){
+      if(documento.id == nPatrimonio){
+        return bd.collection(sala).doc(nPatrimonio);
+      }
+    }
+  }
+
+  return null;
+}
+
+Future<void> criarPatrimonio(String sala, Patrimonio informacoesPatrimonio) async {
+  FirebaseFirestore bd = FirebaseFirestore.instance;
+
+  await bd.collection(sala).doc(informacoesPatrimonio.nPatrimonio).set(informacoesPatrimonio.paraMap());
+}
+
+Future<void> editarPatrimonio(Patrimonio informacoesPatrimonio) async {
+  encontrarPatrimonio(informacoesPatrimonio.nPatrimonio).then((documento){ 
+    if(documento != null) {documento.set(informacoesPatrimonio.paraMap());}
+  });
+}
+
+Future<void> apagarPatrimonio(String nPatrimonio) async {
+  encontrarPatrimonio(nPatrimonio).then((documento){ 
+    if(documento != null) {documento.delete();}
+  });
+}
 
 void criarSala(){
   // Criar documento listando a sala na coleção "salas"
@@ -54,9 +87,3 @@ void criarSala(){
   // Criar uma coleção para os patrimônios da sala
 }
 
-Future<void> criarPatrimonio(String sala, Patrimonio informacoesPatrimonio) async {
-  FirebaseFirestore bd = FirebaseFirestore.instance;
-
-  await bd.collection(sala).doc(informacoesPatrimonio.nPatrimonio).set(informacoesPatrimonio.paraMap());
-
-}

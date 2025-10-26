@@ -6,15 +6,17 @@ import '../operacoes_banco_de_dados.dart';
 
 part 'formulario.dart';
 part 'catalogar_patrimonio.dart';
-
+part 'editar_patrimonio.dart';
+part 'apagar_patrimonio.dart';
 
 
 
 class NovoProcesso extends StatefulWidget {
   final String tipoDeProcesso;
   final String valorExtraSelecionado;
+  final bool fecharAposUso;
 
-  const NovoProcesso ({super.key, this.tipoDeProcesso = 'Catalogar patrimônio', this.valorExtraSelecionado = ''});
+  const NovoProcesso ({super.key, this.tipoDeProcesso = 'Catalogar patrimônio', this.valorExtraSelecionado = '', this.fecharAposUso = false});
 
   @override
   State<NovoProcesso> createState() => NovoProcessoState();
@@ -34,14 +36,18 @@ class NovoProcessoState extends State<NovoProcesso> {
   
   // Tipo de processo selecionado atualmente
   String? tipoDeProcesso;
+  String? valorExtraSelecionado;
+  bool? fecharAposUso;
   // Conteúdo do formulário para realizar o processo em si
   Widget formulario = Text("Selecione um processo.");
 
-  //Puxar o tipo de processo selecionado no construtor para ser usado aqui
+  //Puxar o tipo de processo e o valor selecionado no construtor para ser usado aqui
   @override
   void initState() {
     super.initState();
     tipoDeProcesso = widget.tipoDeProcesso;
+    valorExtraSelecionado = widget.valorExtraSelecionado;
+    fecharAposUso = widget.fecharAposUso;
   }
 
   
@@ -52,6 +58,10 @@ class NovoProcessoState extends State<NovoProcesso> {
     switch (tipoDeProcesso){
       case 'Catalogar patrimônio':
         formulario = _CatalogarPatrimonio();
+      case 'Apagar patrimônio':
+        formulario = _ApagarPatrimonio(nPatrimonioInicial: valorExtraSelecionado!, fecharAposUso:fecharAposUso!);
+      case 'Editar patrimônio':
+        formulario = _EditarPatrimonio(nPatrimonioInicial: valorExtraSelecionado!, fecharAposUso:fecharAposUso!);
       default:
         formulario = Text('Escolha um processo.');
     }

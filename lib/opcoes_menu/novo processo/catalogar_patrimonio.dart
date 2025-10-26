@@ -17,18 +17,25 @@ class _CatalogarPatrimonioState extends State<_CatalogarPatrimonio> {
       key: _keyFormulario,
       child: Column(
         children: [
-          CampoTexto(nome: 'Sala', controlador: controladores[0], validacao: CampoTexto.checarVazio),
-          CampoTexto(nome: 'N° Patrimonio', controlador: controladores[1], validacao: CampoTexto.checarVazio),
-          CampoTexto(nome: 'Descrição do Item', controlador: controladores[2], validacao: CampoTexto.checarVazio),
-          CampoTexto(nome: 'TR', controlador: controladores[3], validacao: CampoTexto.checarVazio),
-          CampoTexto(nome: 'Conservação', controlador: controladores[4], validacao: CampoTexto.checarVazio),
-          CampoTexto(nome: 'Valor Bem', controlador: controladores[5], validacao: CampoTexto.checarVazio),
-          CampoCheckBox(nome: 'OC', setter: ((valorAtual) => checkboxes[0] = valorAtual)),
-          CampoCheckBox(nome: 'QB', setter: ((valorAtual) => checkboxes[1] = valorAtual)),
-          CampoCheckBox(nome: 'NE', setter: ((valorAtual) => checkboxes[2] = valorAtual)),
-          CampoCheckBox(nome: 'SP', setter: ((valorAtual) => checkboxes[3] = valorAtual)),
           
-          BotaoEnviar(funcao: (){
+          _CampoTextoAutocomplete(
+            nome: 'Sala',
+            controlador: controladores[0],
+            listarPossibilidades: (listaPossibilidades) async {
+              listaPossibilidades.addAll(await listarSalas());
+            }
+          ),
+          _CampoTexto(nome: 'N° Patrimonio', controlador: controladores[1], validacao: _CampoTexto.checarVazio),
+          _CampoTexto(nome: 'Descrição do Item', controlador: controladores[2], validacao: _CampoTexto.checarVazio),
+          _CampoTexto(nome: 'TR', controlador: controladores[3], validacao: _CampoTexto.checarVazio),
+          _CampoTexto(nome: 'Conservação', controlador: controladores[4], validacao: _CampoTexto.checarVazio),
+          _CampoTexto(nome: 'Valor Bem', controlador: controladores[5], validacao: _CampoTexto.checarVazio),
+          _CampoCheckBox(nome: 'OC', setter: ((valorAtual) => checkboxes[0] = valorAtual)),
+          _CampoCheckBox(nome: 'QB', setter: ((valorAtual) => checkboxes[1] = valorAtual)),
+          _CampoCheckBox(nome: 'NE', setter: ((valorAtual) => checkboxes[2] = valorAtual)),
+          _CampoCheckBox(nome: 'SP', setter: ((valorAtual) => checkboxes[3] = valorAtual)),
+          
+          _BotaoEnviar(funcao: (){
             // Validar formulário
             if(_keyFormulario.currentState!.validate()){
               // Fazer outras verificações antes de criar
