@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:patrimonio/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'patrimonio.dart';
-import 'paginas principais/pagina_1.dart';
-import 'paginas principais/pagina_2.dart';
-import 'paginas principais/pagina_3.dart';
+import 'paginas_principais/pagina_1.dart';
+import 'paginas_principais/pagina_2.dart';
+import 'paginas_principais/pagina_3.dart';
 
 
 
