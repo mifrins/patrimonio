@@ -29,7 +29,6 @@ class CatalogoSalasState extends State<CatalogoSalas> {
             );
           }
       });
-
     });
   }
 

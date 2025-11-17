@@ -3,7 +3,7 @@ library;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:patrimonio/patrimonio.dart';
+import 'package:patrimonio/classes/patrimonio.dart';
 import '../operacoes_banco_de_dados.dart';
 
 part 'formulario.dart';
@@ -103,10 +103,9 @@ class NovoProcessoState extends State<NovoProcesso> {
                   }
                 )
               ]
-
-          ),
-          SizedBox(height: 7),   
-          formulario
+            ),
+            SizedBox(height: 7),   
+            formulario
         ]))
       ))
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:patrimonio/elementos_visuais/genericos.dart';
 import 'package:patrimonio/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'paginas_principais/pagina_1.dart';
@@ -23,7 +24,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF018B7B)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF018B7B), primary: const Color(0xFF018B7B)),
       ),
       home: const PaginaInicial(),
     );
@@ -39,10 +40,7 @@ class PaginaInicial extends StatelessWidget {
       length: 3,
       child: Scaffold(
 
-        appBar: AppBar(
-            title: const Text('Patrimônio Coltec', style: TextStyle(color:Colors.black),),
-            backgroundColor: const Color(0xFF018B7B),
-        ),
+        appBar: AppBarPadrao(texto: 'Patrimônio Coltec'),
 
         body: TabBarView(
           children: [
