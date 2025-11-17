@@ -78,7 +78,7 @@ class _SalaDropDownState extends State<_SalaDropDown> {
                                   TextButton(
                                     onPressed: (){
                                       Navigator.pop(context, 'Editar');
-                                      Navigator.push(context, MaterialPageRoute<void>(builder: (context) => NovoProcesso(tipoDeProcesso: 'Editar patrimônio', valorExtraSelecionado: patrimonio.nPatrimonio, fecharAposUso: true,)));
+                                      Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoEditarPatrimonio(nPatrimonioInicial: patrimonio.nPatrimonio, fecharAposUso: true,)));
                                     },
                                     child: const Text('Editar'),
                                   ),
@@ -86,7 +86,7 @@ class _SalaDropDownState extends State<_SalaDropDown> {
                                   TextButton(
                                     onPressed: (){
                                       Navigator.pop(context, 'Apagar');
-                                      Navigator.push(context, MaterialPageRoute<void>(builder: (context) => NovoProcesso(tipoDeProcesso: 'Apagar patrimônio', valorExtraSelecionado: patrimonio.nPatrimonio, fecharAposUso: true,)));
+                                      Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoApagarPatrimonio(nPatrimonioInicial: patrimonio.nPatrimonio, fecharAposUso: true,)));
                                     },
                                     child: const Text('Apagar'),
                                   ),

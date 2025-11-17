@@ -7,8 +7,7 @@ class AppBarPadrao extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('Novo processo',
-      style: TextStyle(color:Colors.black),),
+      title: Text(texto, style: TextStyle(color:Colors.black),),
       backgroundColor: Theme.of(context).colorScheme.primary,
     );
   }
@@ -18,9 +17,9 @@ class AppBarPadrao extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
-class Rolagem extends StatelessWidget{
+class RolagemVertical extends StatelessWidget{
   final Widget child;
-  const Rolagem({required this.child});
+  const RolagemVertical({required this.child});
   @override
   Widget build(BuildContext context) {
     return Expanded(child: ScrollConfiguration(

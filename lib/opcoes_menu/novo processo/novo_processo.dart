@@ -1,9 +1,8 @@
 library;
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:patrimonio/classes/patrimonio.dart';
+import 'package:patrimonio/elementos_visuais/genericos.dart';
 import '../operacoes_banco_de_dados.dart';
 
 part 'formulario.dart';
@@ -14,7 +13,7 @@ part 'adicionar_sala.dart';
 
 
 
-class NovoProcesso extends StatefulWidget {
+/* class NovoProcesso extends StatefulWidget {
   final String tipoDeProcesso;
   final String valorExtraSelecionado;
   final bool fecharAposUso;
@@ -60,7 +59,7 @@ class NovoProcessoState extends State<NovoProcesso> {
     // Atribuir valor ao widget de formulário dependendo do tipo de processo escolhido
     switch (tipoDeProcesso){
       case 'Catalogar patrimônio':
-        formulario = _CatalogarPatrimonio();
+//        formulario = _CatalogarPatrimonio();
       case 'Apagar patrimônio':
         formulario = _ApagarPatrimonio(nPatrimonioInicial: valorExtraSelecionado!, fecharAposUso:fecharAposUso!);
       case 'Editar patrimônio':
@@ -110,4 +109,4 @@ class NovoProcessoState extends State<NovoProcesso> {
       ))
     );
   }
-}
+} */

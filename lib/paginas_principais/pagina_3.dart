@@ -48,7 +48,7 @@ class Pagina3 extends StatelessWidget{
 
         _OpcaoMenu(
           "NOVO PROCESSO",
-          (){ Navigator.push(context, MaterialPageRoute<void>(builder: (context) => const NovoProcesso(tipoDeProcesso: 'Catalogar patrimônio',)));},
+          (){ Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoCatalogarPatrimonio()));},
         ),
 
         _OpcaoMenu(

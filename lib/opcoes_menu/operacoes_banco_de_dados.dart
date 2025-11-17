@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:patrimonio/patrimonio.dart';
+import 'package:patrimonio/classes/patrimonio.dart';
 
 Future<List<String>> listarSalas() async{
   List<String> salas = [];
