@@ -1,5 +1,7 @@
 library;
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:patrimonio/patrimonio.dart';
 import '../operacoes_banco_de_dados.dart';
@@ -8,6 +10,7 @@ part 'formulario.dart';
 part 'catalogar_patrimonio.dart';
 part 'editar_patrimonio.dart';
 part 'apagar_patrimonio.dart';
+part 'adicionar_sala.dart';
 
 
 
@@ -68,7 +71,7 @@ class NovoProcessoState extends State<NovoProcesso> {
 
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Patrimônio Coltec', style: TextStyle(color:Colors.black),),
+          title: const Text('Novo processo', style: TextStyle(color:Colors.black),),
           backgroundColor: const Color(0xFF018B7B),
       ),
 

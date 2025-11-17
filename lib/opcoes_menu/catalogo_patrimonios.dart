@@ -51,7 +51,7 @@ class _SalaDropDownState extends State<_SalaDropDown> {
                 aberto = !aberto;
                 // Se estiver aberto, buscar os dados e depois reconstruir a tabela
                 if(aberto){
-                  listarPatrimonios(widget.nome).then((listaDePatrimonios){
+                  listarPatrimoniosSala(widget.nome).then((listaDePatrimonios){
                     setState(() {
                       linhasTabela.clear();
                       for(var patrimonio in listaDePatrimonios){

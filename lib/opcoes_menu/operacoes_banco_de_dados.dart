@@ -16,7 +16,7 @@ Future<List<String>> listarSalas() async{
   return salas;
 }
 
-Future<List<Patrimonio>> listarPatrimonios(String sala) async{
+Future<List<Patrimonio>> listarPatrimoniosSala(String sala) async{
   List<Patrimonio> patrimonios = [];
 
   // Pegar referência do banco de dados
@@ -81,9 +81,9 @@ Future<void> apagarPatrimonio(String nPatrimonio) async {
   });
 }
 
-void criarSala(){
+Future<void> criarSala(String nome) async {
+  FirebaseFirestore bd = FirebaseFirestore.instance;
   // Criar documento listando a sala na coleção "salas"
-
-  // Criar uma coleção para os patrimônios da sala
+  bd.collection('salas').doc(nome).set({});
 }
 

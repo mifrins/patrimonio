@@ -94,16 +94,14 @@ class _CampoTextoAutocompleteState extends State<_CampoTextoAutocomplete> {
 
 class _CampoCheckBox extends StatefulWidget{
   final String nome;
-  final Function(bool) setter;
-  const _CampoCheckBox({required this.nome, required this.setter});
+  final List<bool> variavel;
+  const _CampoCheckBox({required this.nome, required this.variavel});
 
   @override
   State<_CampoCheckBox> createState() => _CampoCheckBoxState();
 }
 
 class _CampoCheckBoxState extends State<_CampoCheckBox> {
-  bool confirmado = false;
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -114,11 +112,10 @@ class _CampoCheckBoxState extends State<_CampoCheckBox> {
           Text(widget.nome),
           Checkbox(
             checkColor: Colors.white,
-            value: confirmado,
+            value: widget.variavel[0],
             onChanged: (bool? value) {
               setState(() {
-                confirmado = value!;
-                widget.setter(confirmado);
+                widget.variavel[0] = value!;
               });
             },
           ),
