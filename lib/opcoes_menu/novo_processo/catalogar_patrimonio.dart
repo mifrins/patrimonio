@@ -26,7 +26,8 @@ class ProcessoCatalogarPatrimonioState extends State<ProcessoCatalogarPatrimonio
               controlador: controladores[0],
               listarPossibilidades: (listaPossibilidades) async {
                 listaPossibilidades.addAll(await listarSalas());
-              }
+              },
+              onSelected: (_){},
             ),
             _CampoTexto(nome: 'N° Patrimonio', controlador: controladores[1], validacao: _CampoTexto.checarVazio),
             _CampoTexto(nome: 'Descrição do Item', controlador: controladores[2], validacao: _CampoTexto.checarVazio),
@@ -38,7 +39,7 @@ class ProcessoCatalogarPatrimonioState extends State<ProcessoCatalogarPatrimonio
             _CampoCheckBox(nome: 'NE', variavel: checkboxes[2]),
             _CampoCheckBox(nome: 'SP', variavel: checkboxes[3]),
             
-            _BotaoEnviar(funcao: (){
+            _BotaoConfirmar(funcao: (){
               // Validar formulário
               if(_keyFormulario.currentState!.validate()){
                 // Fazer outras verificações antes de criar

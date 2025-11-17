@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:patrimonio/elementos_visuais/genericos.dart';
 import 'operacoes_banco_de_dados.dart';
-import 'novo processo/novo_processo.dart';
+import 'novo_processo/novo_processo.dart';
 
 
 class _SalaDropDown extends StatefulWidget{
@@ -152,18 +153,20 @@ class _CatalogoPatrimoniosState extends State<CatalogoPatrimonios> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-          title: const Text('Catálogo de patrimônios', style: TextStyle(color:Colors.black),),
-          backgroundColor: const Color(0xFF018B7B),
-      ),
+      appBar: AppBarPadrao(texto: 'Catálogo de Patrimônios'),
 
       // Configurar página para ter rolagem sem uma barra lateral
-      body:  Expanded(child: ScrollConfiguration(
-        behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-        child: SingleChildScrollView(child: Column(
+      body:  RolagemVertical( child: Column(
           children:salas
-        ))
-      ))
+      )),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoCatalogarPatrimonio()));
+        },
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: const Icon(Icons.add),
+      )
     );
   }
 }

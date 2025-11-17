@@ -18,7 +18,7 @@ class _AdicionarSalaState extends State<_AdicionarSala> {
         children: [
           _CampoTexto(nome: 'Nome', controlador: controladores[0], validacao: _CampoTexto.checarVazio),
           
-          _BotaoEnviar(funcao: (){
+          _BotaoConfirmar(funcao: (){
             // Validar formulário
             if(_keyFormulario.currentState!.validate()){
               // Fazer outras verificações antes de criar

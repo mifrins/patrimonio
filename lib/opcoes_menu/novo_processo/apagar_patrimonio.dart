@@ -33,10 +33,11 @@ class ProcessoApagarPatrimonioState extends State<ProcessoApagarPatrimonio> {
               controlador: controladores[0],
               listarPossibilidades: (listaPossibilidades) async {
                 listaPossibilidades.addAll(await listarTodosPatrimonios());
-              }
+              },
+              onSelected: (_){},
             ),
             
-            _BotaoEnviar(funcao: (){
+            _BotaoConfirmar(funcao: (){
               // Validar formulário
               if(_keyFormulario.currentState!.validate()){
                 // Fazer outras verificações antes de criar

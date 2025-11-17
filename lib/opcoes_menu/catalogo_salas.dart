@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:patrimonio/elementos_visuais/genericos.dart';
 import 'operacoes_banco_de_dados.dart';
 
 class CatalogoSalas extends StatefulWidget {
@@ -35,12 +36,9 @@ class CatalogoSalasState extends State<CatalogoSalas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: const Text('Patrimônio Coltec', style: TextStyle(color:Colors.black),),
-          backgroundColor: const Color(0xFF018B7B),
-      ),
+      appBar: AppBarPadrao(texto: 'Catálogo de salas'),
 
-      body: DataTable(
+      body: RolagemVertical(child: DataTable(
         columns: const <DataColumn>[
           DataColumn(
             label: Expanded(
@@ -49,7 +47,7 @@ class CatalogoSalasState extends State<CatalogoSalas> {
           ),
         ],
         rows: linhasTabela
-      )
+      ))
     );
   }
 }

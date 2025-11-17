@@ -33,8 +33,9 @@ class _CampoTexto extends StatelessWidget{
 class _CampoTextoAutocomplete extends StatefulWidget{
   final String nome;
   final TextEditingController controlador;
-  final Future<void> Function(List<String>) listarPossibilidades; 
-  const _CampoTextoAutocomplete({super.key, required this.nome, required this.controlador, required this.listarPossibilidades});
+  final Future<void> Function(List<String>) listarPossibilidades;
+  final void Function(String) onSelected;
+  const _CampoTextoAutocomplete({super.key, required this.nome, required this.controlador, required this.listarPossibilidades, required this.onSelected});
 
   @override
   State<_CampoTextoAutocomplete> createState() => _CampoTextoAutocompleteState();
@@ -84,6 +85,7 @@ class _CampoTextoAutocompleteState extends State<_CampoTextoAutocomplete> {
               },
               textEditingController: widget.controlador,
               focusNode: FocusNode(),
+              onSelected: widget.onSelected
             )
           )
         ],),
@@ -125,18 +127,18 @@ class _CampoCheckBoxState extends State<_CampoCheckBox> {
   }
 }
 
-class _BotaoEnviar extends StatelessWidget{
+class _BotaoConfirmar extends StatelessWidget{
   final void Function() funcao;
-  const _BotaoEnviar({super.key, required this.funcao});
+  const _BotaoConfirmar({required this.funcao});
   
   @override
   Widget build(BuildContext context) {
     return FilledButton(
       onPressed: funcao,
       style: ButtonStyle(
-        fixedSize: WidgetStateProperty.all<Size>(Size(90, 60)),
+        fixedSize: WidgetStateProperty.all<Size>(Size(120, 60)),
       ),
-      child: Text("Enviar"),
+      child: Text("Confirmar"),
     );
   }
 }
