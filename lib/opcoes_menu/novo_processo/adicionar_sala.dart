@@ -1,67 +1,59 @@
 part of 'novo_processo.dart';
 
-class _AdicionarSala extends StatefulWidget{
+class ProcessoAdicionarSala extends StatefulWidget{
   @override
-  State<_AdicionarSala> createState() => _AdicionarSalaState();
+  State<ProcessoAdicionarSala> createState() => ProcessoAdicionarSalaState();
 }
 
-class _AdicionarSalaState extends State<_AdicionarSala> {
+class ProcessoAdicionarSalaState extends State<ProcessoAdicionarSala> {
   final _keyFormulario = GlobalKey<FormState>();
 
   List<TextEditingController> controladores = List.generate(1, (contagem) => TextEditingController());
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _keyFormulario,
-      child: Column(
-        children: [
-          _CampoTexto(nome: 'Nome', controlador: controladores[0], validacao: _CampoTexto.checarVazio),
-          
-          _BotaoConfirmar(funcao: (){
-            // Validar formulário
-            if(_keyFormulario.currentState!.validate()){
-              // Fazer outras verificações antes de criar
-              listarTodosPatrimonios().then((listaDePatrimonios){
+    return Scaffold(
+      appBar: AppBarPadrao(texto: 'Adicionar sala'),
+
+      body: RolagemVertical( child: Form(
+        key: _keyFormulario,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 30,),
+
+            _CampoTexto(nome: 'Nome da sala', controlador: controladores[0], validacao: _CampoTexto.checarVazio),
+            
+            _BotaoConfirmar(funcao: (){
+              // Validar formulário
+              if(_keyFormulario.currentState!.validate()){
+                // Fazer outras verificações antes de criar
                 listarSalas().then((listaDeSalas){
-                  // Checar se sala existe
-                  if(!listaDeSalas.contains(controladores[0].text)){
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Sala não existente.'),));
+                  // Checar se sala já existe
+                  if(listaDeSalas.contains(controladores[0].text)){
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Sala já existe.'),));
                     return;
                   }
-                  // Checar se o valor digitado pode ser convertido
-                  if(double.tryParse(controladores[5].text.replaceAll(',', '.')) == null){
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Valor do bem inválido.'),));
-                    return;
-                  }
-                  // Se chegou até aqui, o patrimônio pode ser catalogado.
-                  // Criar documento para o patrimonio
-/*                   criarPatrimonio(
-                    controladores[0].text,
-                    Patrimonio(
-                      nPatrimonio: controladores[1].text,
-                      descricaoDoItem: controladores[2].text,
-                      tr: controladores[3].text,
-                      conservacao: controladores[4].text,
-                      valorBem: double.parse(controladores[5].text.replaceAll(',', '.')),
-                      oc: checkboxes[0][0],
-                      qb: checkboxes[1][0],
-                      ne: checkboxes[2][0],
-                      sp: checkboxes[3][0]
-                    )
-                  ); */
+                  
+                  FirebaseFirestore.instance.collection(controladores[0].text).get().then((querySnapshot){
+                    // Checar se há uma coleção com o mesmo nome da sala a ser criada
+                    if(querySnapshot.docs.isNotEmpty){
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Nome da sala é inválido.'),));
+                      return;
+                    }
 
-                  // Apagar numero do patrimonio fornecido
-                  controladores[1].clear();
+                    // Se chegou até aqui, a sala pode ser criada.
+                    criarSala(controladores[0].text);
 
-                  // Mostrar mensagem depois de criar um patrimonio
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Patrimônio catalogado.'),));
+                    controladores[0].clear();
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Sala criada.'),));
+                  });
                 });
-              });
-            }
-          })
-        ],
-      )
+              }
+            })
+          ],
+        )
+      ))
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:patrimonio/elementos_visuais/genericos.dart';
 import 'operacoes_banco_de_dados.dart';
+import 'novo_processo/novo_processo.dart';
 
 class CatalogoSalas extends StatefulWidget {
   const CatalogoSalas ({super.key});
@@ -47,7 +47,15 @@ class CatalogoSalasState extends State<CatalogoSalas> {
           ),
         ],
         rows: linhasTabela
-      ))
+      )),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoAdicionarSala()));
+        },
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: const Icon(Icons.add),
+      )
     );
   }
 }

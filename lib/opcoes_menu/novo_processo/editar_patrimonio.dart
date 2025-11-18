@@ -51,6 +51,7 @@ class ProcessoEditarPatrimonioState extends State<ProcessoEditarPatrimonio> {
       body: RolagemVertical( child: Form(
         key: _keyFormulario,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _CampoTextoAutocomplete(
               nome: 'N° Patrimonio',

@@ -19,6 +19,7 @@ class ProcessoCatalogarPatrimonioState extends State<ProcessoCatalogarPatrimonio
       body: RolagemVertical( child: Form(
         key: _keyFormulario,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             
             _CampoTextoAutocomplete(

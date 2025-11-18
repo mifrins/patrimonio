@@ -4,7 +4,7 @@ class _CampoTexto extends StatelessWidget{
   final String nome;
   final TextEditingController controlador;
   final String? Function(String?)? validacao;
-  const _CampoTexto({super.key, required this.nome, required this.controlador, required this.validacao});
+  const _CampoTexto({required this.nome, required this.controlador, required this.validacao});
 
   static String? checarVazio(String? texto){
     if(texto == ''){
@@ -15,17 +15,22 @@ class _CampoTexto extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.sizeOf(context).width - 30,
-      height: 75,
-      child: TextFormField(
-        decoration: InputDecoration(
-          labelText: nome,
-          filled: true,
+    return Row(
+      children: [
+        SizedBox(width: 15),
+        SizedBox(
+          width: MediaQuery.sizeOf(context).width - 30,
+          height: 75,
+          child: TextFormField(
+            decoration: InputDecoration(
+              labelText: nome,
+              filled: true,
+            ),
+            controller: controlador,
+            validator: validacao,
+          )
         ),
-        controller: controlador,
-        validator: validacao,
-      )
+      ],
     );
   }
 }
@@ -35,7 +40,7 @@ class _CampoTextoAutocomplete extends StatefulWidget{
   final TextEditingController controlador;
   final Future<void> Function(List<String>) listarPossibilidades;
   final void Function(String) onSelected;
-  const _CampoTextoAutocomplete({super.key, required this.nome, required this.controlador, required this.listarPossibilidades, required this.onSelected});
+  const _CampoTextoAutocomplete({required this.nome, required this.controlador, required this.listarPossibilidades, required this.onSelected});
 
   @override
   State<_CampoTextoAutocomplete> createState() => _CampoTextoAutocompleteState();
@@ -63,7 +68,7 @@ class _CampoTextoAutocompleteState extends State<_CampoTextoAutocomplete> {
               children:[
                 SizedBox(height: 13),            
                 Text(
-                  ('${widget.nome}   '),
+                  ('${widget.nome}  '),
                   style: TextStyle(
                     fontSize: 19,
                   )
@@ -111,6 +116,7 @@ class _CampoCheckBoxState extends State<_CampoCheckBox> {
       height: 50,
       child: Row(
         children: [
+          SizedBox(width: 15),
           Text(widget.nome),
           Checkbox(
             checkColor: Colors.white,
@@ -133,12 +139,17 @@ class _BotaoConfirmar extends StatelessWidget{
   
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
-      onPressed: funcao,
-      style: ButtonStyle(
-        fixedSize: WidgetStateProperty.all<Size>(Size(120, 60)),
-      ),
-      child: Text("Confirmar"),
+    return Row(
+      children: [
+        SizedBox(width: 50),
+        FilledButton(
+          onPressed: funcao,
+          style: ButtonStyle(
+            fixedSize: WidgetStateProperty.all<Size>(Size(120, 60)),
+          ),
+          child: Text("Confirmar"),
+        ),
+      ],
     );
   }
 }
