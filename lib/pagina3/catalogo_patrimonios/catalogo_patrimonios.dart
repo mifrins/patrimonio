@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patrimonio/elementos_ui/genericos.dart';
-import 'operacoes_banco_de_dados.dart';
-import 'operacoes_patrimonio/operacoes_patrimonio.dart';
+import '../operacoes_banco_de_dados.dart';
+import 'operacoes_patrimonio.dart';
 
 
 class _SalaDropDown extends StatefulWidget{

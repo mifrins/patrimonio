@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patrimonio/elementos_ui/genericos.dart';
-import 'operacoes_banco_de_dados.dart';
-import 'operacoes_salas/operacoes_salas.dart';
+import '../operacoes_banco_de_dados.dart';
+import 'operacoes_salas.dart';
 
 class CatalogoSalas extends StatefulWidget {
   const CatalogoSalas ({super.key});
