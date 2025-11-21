@@ -1,4 +1,4 @@
-part of 'novo_processo.dart';
+part of 'operacoes_salas.dart';
 
 class ProcessoAdicionarSala extends StatefulWidget{
   @override
@@ -22,9 +22,9 @@ class ProcessoAdicionarSalaState extends State<ProcessoAdicionarSala> {
           children: [
             SizedBox(height: 30,),
 
-            _CampoTexto(nome: 'Nome da sala', controlador: controladores[0], validacao: _CampoTexto.checarVazio),
+            CampoTexto(nome: 'Nome da sala', controlador: controladores[0], validacao: CampoTexto.checarVazio),
             
-            _BotaoConfirmar(funcao: (){
+            BotaoConfirmar(funcao: (){
               // Validar formulário
               if(_keyFormulario.currentState!.validate()){
                 // Fazer outras verificações antes de criar

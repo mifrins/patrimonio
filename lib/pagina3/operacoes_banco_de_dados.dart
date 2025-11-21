@@ -98,8 +98,6 @@ Future<void> criarSala(String nome) async {
 }
 
 Future<void> renomearSala(String nomeAntigo, String novoNome) async {
-  FirebaseFirestore bd = FirebaseFirestore.instance;
-  
   criarSala(novoNome);
 
   // Iterar pelos documentos na coleção antiga copiando eles pra coleção nova

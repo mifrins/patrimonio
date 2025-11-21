@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:patrimonio/elementos_visuais/genericos.dart';
+import 'package:patrimonio/elementos_ui/genericos.dart';
 import 'package:patrimonio/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'paginas_principais/pagina_1.dart';

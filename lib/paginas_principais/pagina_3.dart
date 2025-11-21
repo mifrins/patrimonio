@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:patrimonio/opcoes_menu/catalogo_patrimonios.dart';
-import 'package:patrimonio/opcoes_menu/catalogo_salas.dart';
-import 'package:patrimonio/opcoes_menu/novo_processo/novo_processo.dart';
+import 'package:patrimonio/pagina3/catalogo_patrimonios.dart';
+import 'package:patrimonio/pagina3/catalogo_salas.dart';
 
 class _OpcaoMenu extends StatelessWidget{
   final String texto;
@@ -47,8 +46,8 @@ class Pagina3 extends StatelessWidget{
         ),
 
         _OpcaoMenu(
-          "NOVO PROCESSO",
-          (){ Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoCatalogarPatrimonio()));},
+          "Abrir novo processo",
+          (){},
         ),
 
         _OpcaoMenu(

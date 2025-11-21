@@ -1,4 +1,4 @@
-part of 'novo_processo.dart';
+part of 'operacoes_patrimonio.dart';
 
 class ProcessoEditarPatrimonio extends StatefulWidget{
   final String nPatrimonioEscolhido;
@@ -51,17 +51,17 @@ class ProcessoEditarPatrimonioState extends State<ProcessoEditarPatrimonio> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 30,),
-            _CampoTexto(nome: 'N° do patrimônio', controlador: controladores[0], validacao: _CampoTexto.checarVazio),
-            _CampoTexto(nome: 'Descrição do item', controlador: controladores[1], validacao: _CampoTexto.checarVazio),
-            _CampoTexto(nome: 'TR', controlador: controladores[2], validacao: _CampoTexto.checarVazio),
-            _CampoTexto(nome: 'Conservação', controlador: controladores[3], validacao: _CampoTexto.checarVazio),
-            _CampoTexto(nome: 'Valor bem', controlador: controladores[4], validacao: _CampoTexto.checarVazio),
-            _CampoCheckBox(nome: 'OC', variavel: checkboxes[0]),
-            _CampoCheckBox(nome: 'QB', variavel: checkboxes[1]),
-            _CampoCheckBox(nome: 'NE', variavel: checkboxes[2]),
-            _CampoCheckBox(nome: 'SP', variavel: checkboxes[3]),
+            CampoTexto(nome: 'N° do patrimônio', controlador: controladores[0], validacao: CampoTexto.checarVazio),
+            CampoTexto(nome: 'Descrição do item', controlador: controladores[1], validacao: CampoTexto.checarVazio),
+            CampoTexto(nome: 'TR', controlador: controladores[2], validacao: CampoTexto.checarVazio),
+            CampoTexto(nome: 'Conservação', controlador: controladores[3], validacao: CampoTexto.checarVazio),
+            CampoTexto(nome: 'Valor bem', controlador: controladores[4], validacao: CampoTexto.checarVazio),
+            CampoCheckBox(nome: 'OC', variavel: checkboxes[0]),
+            CampoCheckBox(nome: 'QB', variavel: checkboxes[1]),
+            CampoCheckBox(nome: 'NE', variavel: checkboxes[2]),
+            CampoCheckBox(nome: 'SP', variavel: checkboxes[3]),
 
-            _BotaoConfirmar(funcao: (){
+            BotaoConfirmar(funcao: (){
               // Validar formulário
               if(_keyFormulario.currentState!.validate()){
                 // Fazer outras verificações antes de criar

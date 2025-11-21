@@ -1,4 +1,4 @@
-part of 'novo_processo.dart';
+part of 'operacoes_patrimonio.dart';
 
 class ProcessoApagarPatrimonio extends StatefulWidget{
   final String nPatrimonioInicial;
@@ -29,7 +29,7 @@ class ProcessoApagarPatrimonioState extends State<ProcessoApagarPatrimonio> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _CampoTextoAutocomplete(
+            CampoTextoAutocomplete(
               nome: 'N° Patrimonio',
               controlador: controladores[0],
               listarPossibilidades: (listaPossibilidades) async {
@@ -38,7 +38,7 @@ class ProcessoApagarPatrimonioState extends State<ProcessoApagarPatrimonio> {
               onSelected: (_){},
             ),
             
-            _BotaoConfirmar(funcao: (){
+            BotaoConfirmar(funcao: (){
               // Validar formulário
               if(_keyFormulario.currentState!.validate()){
                 // Fazer outras verificações antes de criar

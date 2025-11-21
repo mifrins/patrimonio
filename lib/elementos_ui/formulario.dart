@@ -1,10 +1,11 @@
-part of 'novo_processo.dart';
+import 'package:flutter/material.dart';
 
-class _CampoTexto extends StatelessWidget{
+
+class CampoTexto extends StatelessWidget{
   final String nome;
   final TextEditingController controlador;
   final String? Function(String?)? validacao;
-  const _CampoTexto({required this.nome, required this.controlador, required this.validacao});
+  const CampoTexto({required this.nome, required this.controlador, required this.validacao});
 
   static String? checarVazio(String? texto){
     if(texto == ''){
@@ -35,18 +36,18 @@ class _CampoTexto extends StatelessWidget{
   }
 }
 
-class _CampoTextoAutocomplete extends StatefulWidget{
+class CampoTextoAutocomplete extends StatefulWidget{
   final String nome;
   final TextEditingController controlador;
   final Future<void> Function(List<String>) listarPossibilidades;
   final void Function(String) onSelected;
-  const _CampoTextoAutocomplete({required this.nome, required this.controlador, required this.listarPossibilidades, required this.onSelected});
+  const CampoTextoAutocomplete({required this.nome, required this.controlador, required this.listarPossibilidades, required this.onSelected});
 
   @override
-  State<_CampoTextoAutocomplete> createState() => _CampoTextoAutocompleteState();
+  State<CampoTextoAutocomplete> createState() => CampoTextoAutocompleteState();
 }
 
-class _CampoTextoAutocompleteState extends State<_CampoTextoAutocomplete> {
+class CampoTextoAutocompleteState extends State<CampoTextoAutocomplete> {
   List<String> possibilidades = [];
 
    @override
@@ -99,16 +100,16 @@ class _CampoTextoAutocompleteState extends State<_CampoTextoAutocomplete> {
   }
 }
 
-class _CampoCheckBox extends StatefulWidget{
+class CampoCheckBox extends StatefulWidget{
   final String nome;
   final List<bool> variavel;
-  const _CampoCheckBox({required this.nome, required this.variavel});
+  const CampoCheckBox({required this.nome, required this.variavel});
 
   @override
-  State<_CampoCheckBox> createState() => _CampoCheckBoxState();
+  State<CampoCheckBox> createState() => CampoCheckBoxState();
 }
 
-class _CampoCheckBoxState extends State<_CampoCheckBox> {
+class CampoCheckBoxState extends State<CampoCheckBox> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -133,9 +134,9 @@ class _CampoCheckBoxState extends State<_CampoCheckBox> {
   }
 }
 
-class _BotaoConfirmar extends StatelessWidget{
+class BotaoConfirmar extends StatelessWidget{
   final void Function() funcao;
-  const _BotaoConfirmar({required this.funcao});
+  const BotaoConfirmar({required this.funcao});
   
   @override
   Widget build(BuildContext context) {

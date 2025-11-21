@@ -1,4 +1,4 @@
-part of 'novo_processo.dart';
+part of 'operacoes_patrimonio.dart';
 
 class ProcessoCatalogarPatrimonio extends StatefulWidget{
   @override
@@ -22,7 +22,7 @@ class ProcessoCatalogarPatrimonioState extends State<ProcessoCatalogarPatrimonio
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             
-            _CampoTextoAutocomplete(
+            CampoTextoAutocomplete(
               nome: 'Sala',
               controlador: controladores[0],
               listarPossibilidades: (listaPossibilidades) async {
@@ -30,17 +30,17 @@ class ProcessoCatalogarPatrimonioState extends State<ProcessoCatalogarPatrimonio
               },
               onSelected: (_){},
             ),
-            _CampoTexto(nome: 'N° Patrimonio', controlador: controladores[1], validacao: _CampoTexto.checarVazio),
-            _CampoTexto(nome: 'Descrição do Item', controlador: controladores[2], validacao: _CampoTexto.checarVazio),
-            _CampoTexto(nome: 'TR', controlador: controladores[3], validacao: _CampoTexto.checarVazio),
-            _CampoTexto(nome: 'Conservação', controlador: controladores[4], validacao: _CampoTexto.checarVazio),
-            _CampoTexto(nome: 'Valor Bem', controlador: controladores[5], validacao: _CampoTexto.checarVazio),
-            _CampoCheckBox(nome: 'OC', variavel: checkboxes[0]),
-            _CampoCheckBox(nome: 'QB', variavel: checkboxes[1]),
-            _CampoCheckBox(nome: 'NE', variavel: checkboxes[2]),
-            _CampoCheckBox(nome: 'SP', variavel: checkboxes[3]),
+            CampoTexto(nome: 'N° Patrimonio', controlador: controladores[1], validacao: CampoTexto.checarVazio),
+            CampoTexto(nome: 'Descrição do Item', controlador: controladores[2], validacao: CampoTexto.checarVazio),
+            CampoTexto(nome: 'TR', controlador: controladores[3], validacao: CampoTexto.checarVazio),
+            CampoTexto(nome: 'Conservação', controlador: controladores[4], validacao: CampoTexto.checarVazio),
+            CampoTexto(nome: 'Valor Bem', controlador: controladores[5], validacao: CampoTexto.checarVazio),
+            CampoCheckBox(nome: 'OC', variavel: checkboxes[0]),
+            CampoCheckBox(nome: 'QB', variavel: checkboxes[1]),
+            CampoCheckBox(nome: 'NE', variavel: checkboxes[2]),
+            CampoCheckBox(nome: 'SP', variavel: checkboxes[3]),
             
-            _BotaoConfirmar(funcao: (){
+            BotaoConfirmar(funcao: (){
               // Validar formulário
               if(_keyFormulario.currentState!.validate()){
                 // Fazer outras verificações antes de criar

@@ -1,4 +1,4 @@
-part of 'novo_processo.dart';
+part of 'operacoes_salas.dart';
 
 class ProcessoApagarSala extends StatefulWidget{
   final String salaEscolhida;
@@ -27,7 +27,7 @@ class ProcessoApagarSalaState extends State<ProcessoApagarSala> {
           children: [
             SizedBox(height: 30),
 
-            _CampoTextoAutocomplete(
+            CampoTextoAutocomplete(
               nome: 'Sala',
               controlador: controladores[0],
               listarPossibilidades: (listaPossibilidades) async {
@@ -36,7 +36,7 @@ class ProcessoApagarSalaState extends State<ProcessoApagarSala> {
               onSelected: (_){},
             ),
 
-            _BotaoConfirmar(funcao: (){
+            BotaoConfirmar(funcao: (){
               // Validar formulário
               if(_keyFormulario.currentState!.validate()){
                 // Fazer outras verificações antes de criar

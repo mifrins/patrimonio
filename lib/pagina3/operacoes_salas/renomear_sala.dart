@@ -1,4 +1,4 @@
-part of 'novo_processo.dart';
+part of 'operacoes_salas.dart';
 
 class ProcessoRenomearSala extends StatefulWidget{
   final String salaEscolhida;
@@ -27,9 +27,9 @@ class ProcessoRenomearSalaState extends State<ProcessoRenomearSala> {
           children: [
             SizedBox(height: 30),
 
-            _CampoTexto(nome: 'Novo nome', controlador: controladores[0], validacao: _CampoTexto.checarVazio),
+            CampoTexto(nome: 'Novo nome', controlador: controladores[0], validacao: CampoTexto.checarVazio),
 
-            _BotaoConfirmar(funcao: (){
+            BotaoConfirmar(funcao: (){
               // Validar formulário
               if(_keyFormulario.currentState!.validate()){
                 // Fazer outras verificações antes de renomear
