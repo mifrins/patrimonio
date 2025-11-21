@@ -66,12 +66,22 @@ Future<DocumentReference<Map<String, dynamic>>?> encontrarPatrimonio(String nPat
 Future<void> criarPatrimonio(String sala, Patrimonio informacoesPatrimonio) async {
   FirebaseFirestore bd = FirebaseFirestore.instance;
 
-  await bd.collection(sala).doc(informacoesPatrimonio.nPatrimonio).set(informacoesPatrimonio.paraMap());
+  bd.collection(sala).doc(informacoesPatrimonio.nPatrimonio).set(informacoesPatrimonio.paraMap());
 }
 
-Future<void> editarPatrimonio(Patrimonio informacoesPatrimonio) async {
-  encontrarPatrimonio(informacoesPatrimonio.nPatrimonio).then((documento){ 
-    if(documento != null) {documento.set(informacoesPatrimonio.paraMap());}
+Future<void> editarPatrimonio(String nPatOriginal, Patrimonio informacoesPatrimonio) async {
+  
+  // Encontrar documento original do patrimonio
+  encontrarPatrimonio(nPatOriginal).then((documento){ 
+    if(documento != null) {
+      // Criar novo documento na mesma sala com o novo n de patrimonio
+      criarPatrimonio(documento.parent.id, informacoesPatrimonio);
+      
+      // Se o novo n de patrimonio for diferente do original, apagar documento original que não foi substituído
+      if(nPatOriginal != informacoesPatrimonio){
+        documento.delete();
+      }
+    }
   });
 }
 
@@ -87,3 +97,30 @@ Future<void> criarSala(String nome) async {
   bd.collection('salas').doc(nome).set({});
 }
 
+Future<void> renomearSala(String nomeAntigo, String novoNome) async {
+  FirebaseFirestore bd = FirebaseFirestore.instance;
+  
+  criarSala(novoNome);
+
+  // Iterar pelos documentos na coleção antiga copiando eles pra coleção nova
+  for(var patrimonio in await listarPatrimoniosSala(nomeAntigo)){
+    criarPatrimonio(novoNome, patrimonio);
+  }
+
+  apagarSala(nomeAntigo);
+
+}
+
+Future<void> apagarSala(String nome) async {
+  FirebaseFirestore bd = FirebaseFirestore.instance;
+  var sala = bd.collection(nome);
+  
+  // Deletar todos documentos na coleção da sala
+  for(var patrimonio in await listarPatrimoniosSala(nome)){
+    sala.doc(patrimonio.nPatrimonio).delete();
+  }
+
+  // Deletar documento listando a sala na coleção "salas"
+  bd.collection('salas').doc(nome).delete();
+
+}

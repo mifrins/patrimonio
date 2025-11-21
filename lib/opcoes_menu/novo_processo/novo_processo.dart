@@ -11,3 +11,5 @@ part 'catalogar_patrimonio.dart';
 part 'editar_patrimonio.dart';
 part 'apagar_patrimonio.dart';
 part 'adicionar_sala.dart';
+part 'renomear_sala.dart';
+part 'apagar_sala.dart';

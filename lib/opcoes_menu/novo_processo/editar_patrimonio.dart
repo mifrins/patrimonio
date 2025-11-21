@@ -1,9 +1,8 @@
 part of 'novo_processo.dart';
 
 class ProcessoEditarPatrimonio extends StatefulWidget{
-  final String nPatrimonioInicial;
-  final bool fecharAposUso;
-  const ProcessoEditarPatrimonio({this.nPatrimonioInicial = '', this.fecharAposUso = false});
+  final String nPatrimonioEscolhido;
+  const ProcessoEditarPatrimonio({required this.nPatrimonioEscolhido});
   @override
   State<ProcessoEditarPatrimonio> createState() => ProcessoEditarPatrimonioState();
 }
@@ -15,11 +14,12 @@ class ProcessoEditarPatrimonioState extends State<ProcessoEditarPatrimonio> {
   List<List<bool>> checkboxes = List.generate(4, (contagem) => [false]);
 
   Future<void> carregarDadosPatrimonio() async {
-    encontrarPatrimonio(controladores[0].text).then((documento){
+    encontrarPatrimonio(widget.nPatrimonioEscolhido).then((documento){
       if(documento != null){
         documento.get().then((documentoSnapshot){
           setState(() {
             Patrimonio dadosPatrimonio = Patrimonio.deMapa(documentoSnapshot.data()!);
+            controladores[0].text = widget.nPatrimonioEscolhido;
             controladores[1].text = dadosPatrimonio.descricaoDoItem;
             controladores[2].text = dadosPatrimonio.tr;
             controladores[3].text = dadosPatrimonio.conservacao;
@@ -37,36 +37,25 @@ class ProcessoEditarPatrimonioState extends State<ProcessoEditarPatrimonio> {
   @override
   void initState() {
     super.initState();
-    if(widget.nPatrimonioInicial != ''){
-      controladores[0].text = widget.nPatrimonioInicial;
-      carregarDadosPatrimonio();
-    }
+    carregarDadosPatrimonio();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarPadrao(texto: 'Editar patrimônio'),
+      appBar: AppBarPadrao(texto: 'Patrimônio n°${widget.nPatrimonioEscolhido}'),
 
       body: RolagemVertical( child: Form(
         key: _keyFormulario,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _CampoTextoAutocomplete(
-              nome: 'N° Patrimonio',
-              controlador: controladores[0],
-              listarPossibilidades: (listaPossibilidades) async {
-                listaPossibilidades.addAll(await listarTodosPatrimonios());
-              },
-              onSelected: (_){
-                carregarDadosPatrimonio();
-              },
-            ),
-            _CampoTexto(nome: 'Descrição do Item', controlador: controladores[1], validacao: _CampoTexto.checarVazio),
+            SizedBox(height: 30,),
+            _CampoTexto(nome: 'N° do patrimônio', controlador: controladores[0], validacao: _CampoTexto.checarVazio),
+            _CampoTexto(nome: 'Descrição do item', controlador: controladores[1], validacao: _CampoTexto.checarVazio),
             _CampoTexto(nome: 'TR', controlador: controladores[2], validacao: _CampoTexto.checarVazio),
             _CampoTexto(nome: 'Conservação', controlador: controladores[3], validacao: _CampoTexto.checarVazio),
-            _CampoTexto(nome: 'Valor Bem', controlador: controladores[4], validacao: _CampoTexto.checarVazio),
+            _CampoTexto(nome: 'Valor bem', controlador: controladores[4], validacao: _CampoTexto.checarVazio),
             _CampoCheckBox(nome: 'OC', variavel: checkboxes[0]),
             _CampoCheckBox(nome: 'QB', variavel: checkboxes[1]),
             _CampoCheckBox(nome: 'NE', variavel: checkboxes[2]),
@@ -77,11 +66,6 @@ class ProcessoEditarPatrimonioState extends State<ProcessoEditarPatrimonio> {
               if(_keyFormulario.currentState!.validate()){
                 // Fazer outras verificações antes de criar
                 listarTodosPatrimonios().then((listaDePatrimonios){
-                  // Checar se o patrimônio existe
-                  if(!listaDePatrimonios.contains(controladores[0].text)){
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Patrimônio não encontrado.'),));
-                      return;
-                  }
                   listarSalas().then((listaDeSalas){
                     // Checar se o valor digitado pode ser convertido
                     if(double.tryParse(controladores[4].text.replaceAll(',', '.')) == null){
@@ -90,6 +74,7 @@ class ProcessoEditarPatrimonioState extends State<ProcessoEditarPatrimonio> {
                     }
                     // Se chegou até aqui, o patrimônio pode ser editado.
                     editarPatrimonio(
+                      widget.nPatrimonioEscolhido,
                       Patrimonio(
                         nPatrimonio: controladores[0].text,
                         descricaoDoItem: controladores[1].text,
@@ -106,9 +91,8 @@ class ProcessoEditarPatrimonioState extends State<ProcessoEditarPatrimonio> {
                     // Mostrar mensagem depois de editar o patrimonio
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Alterações salvas.'),));
 
-                    if(widget.fecharAposUso){
-                      Navigator.pop(context);
-                    }
+                    // Fechar janela de edição do patrimonio
+                    Navigator.pop(context);
                   });
                 });
               }

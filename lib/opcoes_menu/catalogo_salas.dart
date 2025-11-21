@@ -26,6 +26,34 @@ class CatalogoSalasState extends State<CatalogoSalas> {
                 cells: <DataCell>[
                   DataCell(Text(sala)),
                 ],
+
+                onLongPress: () => showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: Text(sala),
+                    content: const Text('Escolha uma ação'),
+                    actions: <Widget>[
+                      // Renomear
+                      TextButton(
+                        onPressed: (){
+                          Navigator.pop(context, 'Renomear');
+                          Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoRenomearSala(salaEscolhida: sala,)));
+                        },
+                        child: const Text('Renomear'),
+                      ),
+                      // Apagar
+                      TextButton(
+                        onPressed: (){
+                          Navigator.pop(context, 'Apagar');
+                          Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoApagarSala(salaEscolhida: sala,)));
+                        },
+                        child: const Text('Apagar'),
+                      ),
+                      // Cancelar
+                      TextButton(onPressed: () => Navigator.pop(context, 'Cancelar'), child: const Text('Cancelar')),
+                    ],
+                  ),
+                ),
               ),
             );
           }

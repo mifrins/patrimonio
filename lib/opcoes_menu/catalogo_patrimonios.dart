@@ -79,7 +79,7 @@ class _SalaDropDownState extends State<_SalaDropDown> {
                                   TextButton(
                                     onPressed: (){
                                       Navigator.pop(context, 'Editar');
-                                      Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoEditarPatrimonio(nPatrimonioInicial: patrimonio.nPatrimonio, fecharAposUso: true,)));
+                                      Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoEditarPatrimonio(nPatrimonioEscolhido: patrimonio.nPatrimonio)));
                                     },
                                     child: const Text('Editar'),
                                   ),
