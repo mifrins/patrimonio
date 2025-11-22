@@ -118,7 +118,6 @@ class CampoCheckBoxState extends State<CampoCheckBox> {
       child: Row(
         children: [
           SizedBox(width: 15),
-          Text(widget.nome),
           Checkbox(
             checkColor: Colors.white,
             value: widget.variavel[0],
@@ -128,6 +127,7 @@ class CampoCheckBoxState extends State<CampoCheckBox> {
               });
             },
           ),
+          Text(widget.nome),          
         ],
       )
     );

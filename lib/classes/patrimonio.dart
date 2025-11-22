@@ -42,7 +42,7 @@ class Patrimonio {
     };
   }
 
-  factory Patrimonio.deMapa(Map<String, dynamic> mapa) {
+  factory Patrimonio.deMap(Map<String, dynamic> mapa) {
     return Patrimonio(
       nPatrimonio: mapa['nPatrimonio'],
       descricaoDoItem: mapa['descricaoDoItem'],

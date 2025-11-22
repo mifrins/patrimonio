@@ -8,7 +8,7 @@ Future<List<String>> listarSalas() async{
   FirebaseFirestore bd = FirebaseFirestore.instance;
 
   // Obter todos documentos na coleção "salas", e usar elas por meio da variável querySnapshot
-  QuerySnapshot querySnapshot = await  bd.collection('salas').get();
+  QuerySnapshot querySnapshot = await bd.collection('salas').get();
 
   for (var documento in querySnapshot.docs){
     salas.add(documento.id);
@@ -26,7 +26,7 @@ Future<List<Patrimonio>> listarPatrimoniosSala(String sala) async{
   QuerySnapshot querySnapshot = await  bd.collection(sala).get();
 
   for (var documento in querySnapshot.docs){
-    patrimonios.add(Patrimonio.deMapa(documento.data() as Map<String, dynamic>));
+    patrimonios.add(Patrimonio.deMap(documento.data() as Map<String, dynamic>));
   }
   return patrimonios;
 }
@@ -121,4 +121,33 @@ Future<void> apagarSala(String nome) async {
   // Deletar documento listando a sala na coleção "salas"
   bd.collection('salas').doc(nome).delete();
 
+}
+
+Future<void> criarProcesso({required String tipo, required String descricao, required String sala, required bool deixarPendente}) async {
+  FirebaseFirestore bd = FirebaseFirestore.instance;
+
+  // E-mail do usuário atual
+  var identificacaoUsuario = 'placeholder@teiacoltec.org';
+
+  // Onde o processo deve ser criado
+  String destino;
+  if(deixarPendente){
+    destino = 'processos_pendentes';
+  } else {
+    destino = 'processos_passados';
+  }
+
+  // Hora que o processo está sendo criado
+  DateTime tempoAtual = DateTime.now();
+
+  // Criar documento para o processo
+  bd.collection(destino).doc('${tempoAtual.toIso8601String()} $identificacaoUsuario').set(
+    {
+      'data': tempoAtual.toString(),
+      'responsavel': identificacaoUsuario,
+      'tipo': tipo,
+      'descricao': descricao,
+      'sala': sala,
+    }
+  );
 }

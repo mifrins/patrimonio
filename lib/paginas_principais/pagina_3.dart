@@ -1,30 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:patrimonio/elementos_ui/menu.dart';
 
-import 'package:patrimonio/pagina3/catalogo_patrimonios.dart';
-import 'package:patrimonio/pagina3/catalogo_salas.dart';
+import 'package:patrimonio/pagina3/catalogo_patrimonios/catalogo_patrimonios.dart';
+import 'package:patrimonio/pagina3/catalogo_salas/catalogo_salas.dart';
 
-class _OpcaoMenu extends StatelessWidget{
-  final String texto;
-  final VoidCallback rotaConstrutorPagina;
-  const _OpcaoMenu(this.texto, this.rotaConstrutorPagina);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        OutlinedButton(
-          onPressed: rotaConstrutorPagina,
-          style: ButtonStyle(
-            fixedSize: WidgetStateProperty.all<Size>(Size(MediaQuery.sizeOf(context).width - 40, 80)),
-            shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
-          ),
-          child: Text(texto, style: TextStyle( fontSize: 20)),
-        ),
-        SizedBox(height: 7),   
-      ]
-    );
-  }
-}
+import 'package:patrimonio/pagina3/novo_processo/novo_processo.dart';
 
 class Pagina3 extends StatelessWidget{
   const Pagina3({super.key});
@@ -35,22 +15,27 @@ class Pagina3 extends StatelessWidget{
 
         SizedBox(height: 20,), 
 
-        _OpcaoMenu(
+        OpcaoMenu(
           "Catálogo de patrimônios",
           (){ Navigator.push(context, MaterialPageRoute<void>(builder: (context) => const CatalogoPatrimonios()));},
         ),
 
-        _OpcaoMenu(
+        OpcaoMenu(
           "Catálogo de salas",
           (){ Navigator.push(context, MaterialPageRoute<void>(builder: (context) => const CatalogoSalas()));},
         ),
 
-        _OpcaoMenu(
+        OpcaoMenu(
           "Abrir novo processo",
-          (){},
+          (){ Navigator.push(context, MaterialPageRoute<void>(builder: (context) => const NovoProcesso()));},
         ),
 
-        _OpcaoMenu(
+        OpcaoMenu(
+          "Ver processos abertos",
+          (){ Navigator.push(context, MaterialPageRoute<void>(builder: (context) => const CatalogoPatrimonios()));},
+        ),
+
+        OpcaoMenu(
           "Ver processos passados",
           (){ Navigator.push(context, MaterialPageRoute<void>(builder: (context) => const CatalogoPatrimonios()));},
         ),

@@ -18,7 +18,7 @@ class ProcessoEditarPatrimonioState extends State<ProcessoEditarPatrimonio> {
       if(documento != null){
         documento.get().then((documentoSnapshot){
           setState(() {
-            Patrimonio dadosPatrimonio = Patrimonio.deMapa(documentoSnapshot.data()!);
+            Patrimonio dadosPatrimonio = Patrimonio.deMap(documentoSnapshot.data()!);
             controladores[0].text = widget.nPatrimonioEscolhido;
             controladores[1].text = dadosPatrimonio.descricaoDoItem;
             controladores[2].text = dadosPatrimonio.tr;
