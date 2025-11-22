@@ -73,26 +73,34 @@ class ProcessoEditarPatrimonioState extends State<ProcessoEditarPatrimonio> {
                       return;
                     }
                     // Se chegou até aqui, o patrimônio pode ser editado.
-                    editarPatrimonio(
-                      widget.nPatrimonioEscolhido,
-                      Patrimonio(
-                        nPatrimonio: controladores[0].text,
-                        descricaoDoItem: controladores[1].text,
-                        tr: controladores[2].text,
-                        conservacao: controladores[3].text,
-                        valorBem: double.parse(controladores[4].text.replaceAll(',', '.')),
-                        oc: checkboxes[0][0],
-                        qb: checkboxes[1][0],
-                        ne: checkboxes[2][0],
-                        sp: checkboxes[3][0]
-                      ) 
-                    );
+                    encontrarPatrimonio(widget.nPatrimonioEscolhido).then((documento){
+                      criarProcesso(
+                        tipo: 'Patrimônio editado',
+                        descricao: '${widget.nPatrimonioEscolhido} para ${controladores[0].text}',
+                        sala: documento!.parent.id,
+                        deixarPendente: false,
+                      );
+                      editarPatrimonio(
+                        widget.nPatrimonioEscolhido,
+                        Patrimonio(
+                          nPatrimonio: controladores[0].text,
+                          descricaoDoItem: controladores[1].text,
+                          tr: controladores[2].text,
+                          conservacao: controladores[3].text,
+                          valorBem: double.parse(controladores[4].text.replaceAll(',', '.')),
+                          oc: checkboxes[0][0],
+                          qb: checkboxes[1][0],
+                          ne: checkboxes[2][0],
+                          sp: checkboxes[3][0]
+                        ) 
+                      );
 
-                    // Mostrar mensagem depois de editar o patrimonio
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Alterações salvas.'),));
+                      // Mostrar mensagem depois de editar o patrimonio
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Alterações salvas.'),));
 
-                    // Fechar janela de edição do patrimonio
-                    Navigator.pop(context);
+                      // Fechar janela de edição do patrimonio
+                      Navigator.pop(context);
+                    });
                   });
                 });
               }

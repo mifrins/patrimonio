@@ -48,17 +48,27 @@ class ProcessoApagarPatrimonioState extends State<ProcessoApagarPatrimonio> {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Patrimônio não existe.'),));
                       return;
                   }
-                  apagarPatrimonio(controladores[0].text);
-      
-                  // Apagar numero do patrimonio fornecido
-                  controladores[0].clear();
 
-                  // Mostrar mensagem depois de apagar patrimonio
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Patrimônio apagado.'),));
-                  
-                  if(widget.fecharAposUso){
-                    Navigator.pop(context);
-                  }
+                  encontrarPatrimonio(controladores[0].text).then((documento){
+                    criarProcesso(
+                      tipo: 'Patrimônio deletado',
+                      descricao: controladores[0].text,
+                      sala: documento!.parent.id,
+                      deixarPendente: false,
+                    );
+
+                    apagarPatrimonio(controladores[0].text);
+
+                    // Apagar numero do patrimonio fornecido
+                    controladores[0].clear();
+
+                    // Mostrar mensagem depois de apagar patrimonio
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Patrimônio apagado.'),));
+                    
+                    if(widget.fecharAposUso){
+                      Navigator.pop(context);
+                    }
+                  });
                 });
               }
             })

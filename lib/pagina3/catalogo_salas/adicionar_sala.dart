@@ -43,6 +43,12 @@ class ProcessoAdicionarSalaState extends State<ProcessoAdicionarSala> {
                     }
 
                     // Se chegou até aqui, a sala pode ser criada.
+                    criarProcesso(
+                      tipo: 'Sala criada',
+                      descricao: controladores[0].text,
+                      sala: controladores[0].text,
+                      deixarPendente: false,
+                    );
                     criarSala(controladores[0].text);
 
                     controladores[0].clear();

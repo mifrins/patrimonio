@@ -1,7 +1,7 @@
 part of 'novo_processo.dart';
 
 class _MoverPatrimonios extends StatefulWidget{
-  const _MoverPatrimonios({super.key});
+  const _MoverPatrimonios();
   @override
   State<_MoverPatrimonios> createState() => _MoverPatrimoniosState();
 }

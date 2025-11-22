@@ -48,6 +48,13 @@ class ProcessoApagarSalaState extends State<ProcessoApagarSala> {
                   }
 
                   // Se chegou até aqui, a sala pode ser apagada.
+                  criarProcesso(
+                    tipo: 'Sala deletada',
+                    descricao: controladores[0].text,
+                    sala: controladores[0].text,
+                    deixarPendente: false,
+                  );
+
                   apagarSala(controladores[0].text);
 
                   controladores[0].clear();

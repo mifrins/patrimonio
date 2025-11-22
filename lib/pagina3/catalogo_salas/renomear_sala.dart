@@ -44,6 +44,12 @@ class ProcessoRenomearSalaState extends State<ProcessoRenomearSala> {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Já existe uma sala com esse nome.'),));
                     return;
                   }
+                  criarProcesso(
+                    tipo: 'Sala editada',
+                    descricao: '${widget.salaEscolhida} para ${controladores[0].text}',
+                    sala: controladores[0].text,
+                    deixarPendente: false,
+                  );
                   // Se chegou até aqui, a sala pode ser renomeada.
                   renomearSala(widget.salaEscolhida, controladores[0].text);
 

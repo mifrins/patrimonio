@@ -13,6 +13,8 @@ Future<List<String>> listarSalas() async{
   for (var documento in querySnapshot.docs){
     salas.add(documento.id);
   }
+
+  print(salas);
   return salas;
 }
 
@@ -50,15 +52,15 @@ Future<List<String>> listarTodosPatrimonios() async{
 Future<DocumentReference<Map<String, dynamic>>?> encontrarPatrimonio(String nPatrimonio) async {
   FirebaseFirestore bd = FirebaseFirestore.instance;
 
-  for (var sala in await listarSalas()){
-    QuerySnapshot querySnapshot = await  bd.collection(sala).get();
+ for (var sala in await listarSalas()){
+    QuerySnapshot querySnapshot = await bd.collection(sala).get();
 
     for (var documento in querySnapshot.docs){
       if(documento.id == nPatrimonio){
         return bd.collection(sala).doc(nPatrimonio);
       }
     }
-  }
+  } 
 
   return null;
 }
@@ -78,7 +80,7 @@ Future<void> editarPatrimonio(String nPatOriginal, Patrimonio informacoesPatrimo
       criarPatrimonio(documento.parent.id, informacoesPatrimonio);
       
       // Se o novo n de patrimonio for diferente do original, apagar documento original que não foi substituído
-      if(nPatOriginal != informacoesPatrimonio){
+      if(nPatOriginal != informacoesPatrimonio.nPatrimonio){
         documento.delete();
       }
     }

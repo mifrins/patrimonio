@@ -62,6 +62,13 @@ class ProcessoCatalogarPatrimonioState extends State<ProcessoCatalogarPatrimonio
                       return;
                     }
                     // Se chegou até aqui, o patrimônio pode ser catalogado.
+                    // Criar registro do processo
+                    criarProcesso(
+                      tipo: 'Patrimônio criado',
+                      descricao: controladores[1].text,
+                      sala: controladores[0].text,
+                      deixarPendente: false,
+                    );
                     // Criar documento para o patrimonio
                     criarPatrimonio(
                       controladores[0].text,
