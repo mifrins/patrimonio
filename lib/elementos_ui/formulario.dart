@@ -62,24 +62,21 @@ class CampoTextoAutocompleteState extends State<CampoTextoAutocomplete> {
       children: [
         Row(children: [
           SizedBox(
-            width: (MediaQuery.sizeOf(context).width - 30)*0.3,
-            height: 43,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children:[
-                SizedBox(height: 13),            
-                Text(
-                  ('${widget.nome}  '),
-                  style: TextStyle(
-                    fontSize: 19,
-                  )
-                ),
-              ]
-            )
+            width: 20,
           ),
-          SizedBox(
-            width: (MediaQuery.sizeOf(context).width - 30)*0.7,
-            height: 43,
+
+          Align(
+            alignment: Alignment.centerRight,              
+            child: Text(
+              ('${widget.nome}  '),
+              style: TextStyle(
+                fontSize: 19,
+              ),
+            ),
+
+          ),
+
+          Expanded(
             child: Autocomplete<String>(
               optionsBuilder: (TextEditingValue textEditingValue) {
                 if (textEditingValue.text == '') {

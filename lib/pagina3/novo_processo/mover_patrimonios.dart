@@ -34,7 +34,7 @@ class _MoverPatrimoniosState extends State<_MoverPatrimonios> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarPadrao(texto: 'Apagar patrimônio'),
+      appBar: AppBarPadrao(texto: 'Mover patrimônios'),
 
       body: RolagemVertical( child: Form(
         key: _keyFormulario,
@@ -89,11 +89,15 @@ class _MoverPatrimoniosState extends State<_MoverPatrimonios> {
                   }
                   criarProcesso(
                     tipo: 'Movimentação de patrimônio',
-                    descricao: 'Movimentando ${patrimoniosSelecionados.join(', ')}',
+                    descricao: 'Movimentando ${patrimoniosSelecionados.join(', ')} de ${salaOriginalControlador.text} para ${salaDestinoControlador.text}',
                     sala: salaDestinoControlador.text,
                     deixarPendente: true
                   );
-                  print('deu certo');
+
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text('Processo aberto.'),));
+                  // Voltar à tela anterior
+                  Navigator.pop(context);
+                  
                 });
               }
             })

@@ -5,6 +5,8 @@ import 'package:patrimonio/pagina3/catalogo_patrimonios/catalogo_patrimonios.dar
 import 'package:patrimonio/pagina3/catalogo_salas/catalogo_salas.dart';
 
 import 'package:patrimonio/pagina3/novo_processo/novo_processo.dart';
+import 'package:patrimonio/pagina3/processos_pendentes/processos_pendentes.dart';
+import 'package:patrimonio/pagina3/processos_passados/processos_passados.dart';
 
 class Pagina3 extends StatelessWidget{
   const Pagina3({super.key});
@@ -31,13 +33,13 @@ class Pagina3 extends StatelessWidget{
         ),
 
         OpcaoMenu(
-          "Ver processos abertos",
-          (){ Navigator.push(context, MaterialPageRoute<void>(builder: (context) => const CatalogoPatrimonios()));},
+          "Ver processos pendentes",
+          (){ Navigator.push(context, MaterialPageRoute<void>(builder: (context) => const ProcessosPendentes()));},
         ),
 
         OpcaoMenu(
           "Ver processos passados",
-          (){ Navigator.push(context, MaterialPageRoute<void>(builder: (context) => const CatalogoPatrimonios()));},
+          (){ Navigator.push(context, MaterialPageRoute<void>(builder: (context) => const ProcessosPassados()));},
         ),
       ]
     );

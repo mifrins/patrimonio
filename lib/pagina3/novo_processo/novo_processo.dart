@@ -21,20 +21,15 @@ class NovoProcesso extends StatelessWidget{
           children: [
         
             SizedBox(height: 20,), 
+
+            OpcaoMenu(
+              'Processar inventário',
+              (){/* Navigator.push(context, MaterialPageRoute<void>(builder: (context) => const _ProcessarInventario())); */},
+            ),            
         
             OpcaoMenu(
-              "Mover patrimônio(s)",
+              'Mover patrimônio(s)',
               (){Navigator.push(context, MaterialPageRoute<void>(builder: (context) => const _MoverPatrimonios()));},
-            ),
-        
-            OpcaoMenu(
-              "Catálogo de salas",
-              (){},
-            ),
-        
-            OpcaoMenu(
-              "Abrir novo processo",
-              (){},
             ),
           ]
         ),
