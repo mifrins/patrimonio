@@ -22,11 +22,13 @@ class RolagemVertical extends StatelessWidget{
   const RolagemVertical({required this.child});
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: ScrollConfiguration(
-      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-      child: SingleChildScrollView(
-        child:child
+    return Expanded(
+      child: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+        child: SingleChildScrollView(
+          child:child
+        )
       )
-    ));
+    );
   }
 }

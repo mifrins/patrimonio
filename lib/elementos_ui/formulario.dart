@@ -61,9 +61,7 @@ class CampoTextoAutocompleteState extends State<CampoTextoAutocomplete> {
     return Column(
       children: [
         Row(children: [
-          SizedBox(
-            width: 20,
-          ),
+          SizedBox(width: 20),
 
           Align(
             alignment: Alignment.centerRight,              
@@ -73,7 +71,6 @@ class CampoTextoAutocompleteState extends State<CampoTextoAutocomplete> {
                 fontSize: 19,
               ),
             ),
-
           ),
 
           Expanded(
@@ -90,7 +87,9 @@ class CampoTextoAutocompleteState extends State<CampoTextoAutocomplete> {
               focusNode: FocusNode(),
               onSelected: widget.onSelected
             )
-          )
+          ),
+
+          SizedBox(width: 20),
         ],),
         SizedBox(height:30)
     ]);
