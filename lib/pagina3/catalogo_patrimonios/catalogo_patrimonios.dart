@@ -1,7 +1,14 @@
+library;
+
 import 'package:flutter/material.dart';
+import 'package:patrimonio/classes/patrimonio.dart';
 import 'package:patrimonio/elementos_ui/genericos.dart';
 import '../operacoes_banco_de_dados.dart';
-import 'operacoes_patrimonio.dart';
+import '../../elementos_ui/formulario.dart';
+
+part 'catalogar_patrimonio.dart';
+part 'editar_patrimonio.dart';
+part 'apagar_patrimonio.dart';
 
 
 class _SalaDropDown extends StatefulWidget{
@@ -79,7 +86,7 @@ class _SalaDropDownState extends State<_SalaDropDown> {
                                   TextButton(
                                     onPressed: (){
                                       Navigator.pop(context, 'Editar');
-                                      Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoEditarPatrimonio(nPatrimonioEscolhido: patrimonio.nPatrimonio)));
+                                      Navigator.push(context, MaterialPageRoute<void>(builder: (context) => _EditarPatrimonio(nPatrimonioEscolhido: patrimonio.nPatrimonio)));
                                     },
                                     child: const Text('Editar'),
                                   ),
@@ -87,7 +94,7 @@ class _SalaDropDownState extends State<_SalaDropDown> {
                                   TextButton(
                                     onPressed: (){
                                       Navigator.pop(context, 'Apagar');
-                                      Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoApagarPatrimonio(nPatrimonioInicial: patrimonio.nPatrimonio, fecharAposUso: true,)));
+                                      Navigator.push(context, MaterialPageRoute<void>(builder: (context) => _ApagarPatrimonio(nPatrimonioInicial: patrimonio.nPatrimonio, fecharAposUso: true,)));
                                     },
                                     child: const Text('Apagar'),
                                   ),
@@ -162,7 +169,7 @@ class _CatalogoPatrimoniosState extends State<CatalogoPatrimonios> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoCatalogarPatrimonio()));
+          Navigator.push(context, MaterialPageRoute<void>(builder: (context) => _CatalogarPatrimonio()));
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.add),

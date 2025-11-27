@@ -1,13 +1,13 @@
-part of 'operacoes_patrimonio.dart';
+part of 'catalogo_patrimonios.dart';
 
-class ProcessoEditarPatrimonio extends StatefulWidget{
+class _EditarPatrimonio extends StatefulWidget{
   final String nPatrimonioEscolhido;
-  const ProcessoEditarPatrimonio({required this.nPatrimonioEscolhido});
+  const _EditarPatrimonio({required this.nPatrimonioEscolhido});
   @override
-  State<ProcessoEditarPatrimonio> createState() => ProcessoEditarPatrimonioState();
+  State<_EditarPatrimonio> createState() => _EditarPatrimonioState();
 }
 
-class ProcessoEditarPatrimonioState extends State<ProcessoEditarPatrimonio> {
+class _EditarPatrimonioState extends State<_EditarPatrimonio> {
   final _keyFormulario = GlobalKey<FormState>();
 
   List<TextEditingController> controladores = List.generate(6, (contagem) => TextEditingController());

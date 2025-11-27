@@ -163,7 +163,7 @@ Future<bool> aprovarProcesso(QueryDocumentSnapshot<Map<String, dynamic>> process
     case 'Movimentação de patrimônio':
     
       List<String> patrimoniosEscolhidos = descricao.substring(13, descricao.indexOf(' de ')).split(', ');
-      String salaOrigem = descricao.substring(descricao.indexOf(' de ') + 4, descricao.indexOf(' para '));
+//    String salaOrigem = descricao.substring(descricao.indexOf(' de ') + 4, descricao.indexOf(' para '));
       String salaDestino = descricao.substring(descricao.indexOf(' para ') + 6, descricao.length);
 
       // Copiar documentos da sala de origem para a sala de destino      

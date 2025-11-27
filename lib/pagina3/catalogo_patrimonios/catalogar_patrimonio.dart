@@ -1,11 +1,11 @@
-part of 'operacoes_patrimonio.dart';
+part of 'catalogo_patrimonios.dart';
 
-class ProcessoCatalogarPatrimonio extends StatefulWidget{
+class _CatalogarPatrimonio extends StatefulWidget{
   @override
-  State<ProcessoCatalogarPatrimonio> createState() => ProcessoCatalogarPatrimonioState();
+  State<_CatalogarPatrimonio> createState() => _CatalogarPatrimonioState();
 }
 
-class ProcessoCatalogarPatrimonioState extends State<ProcessoCatalogarPatrimonio> {
+class _CatalogarPatrimonioState extends State<_CatalogarPatrimonio> {
   final _keyFormulario = GlobalKey<FormState>();
 
   List<TextEditingController> controladores = List.generate(6, (contagem) => TextEditingController());

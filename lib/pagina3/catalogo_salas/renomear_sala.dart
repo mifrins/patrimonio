@@ -1,13 +1,13 @@
-part of 'operacoes_salas.dart';
+part of 'catalogo_salas.dart';
 
-class ProcessoRenomearSala extends StatefulWidget{
+class _RenomearSala extends StatefulWidget{
   final String salaEscolhida;
-  const ProcessoRenomearSala({required this.salaEscolhida});
+  const _RenomearSala({required this.salaEscolhida});
   @override
-  State<ProcessoRenomearSala> createState() => ProcessoRenomearSalaState();
+  State<_RenomearSala> createState() => _RenomearSalaState();
 }
 
-class ProcessoRenomearSalaState extends State<ProcessoRenomearSala> {
+class _RenomearSalaState extends State<_RenomearSala> {
   final _keyFormulario = GlobalKey<FormState>();
 
   List<TextEditingController> controladores = List.generate(1, (contagem) => TextEditingController());

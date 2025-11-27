@@ -1,13 +1,13 @@
-part of 'operacoes_salas.dart';
+part of 'catalogo_salas.dart';
 
-class ProcessoApagarSala extends StatefulWidget{
+class _ApagarSala extends StatefulWidget{
   final String salaEscolhida;
-  const ProcessoApagarSala({required this.salaEscolhida});
+  const _ApagarSala({required this.salaEscolhida});
   @override
-  State<ProcessoApagarSala> createState() => ProcessoApagarSalaState();
+  State<_ApagarSala> createState() => _ApagarSalaState();
 }
 
-class ProcessoApagarSalaState extends State<ProcessoApagarSala> {
+class _ApagarSalaState extends State<_ApagarSala> {
   final _keyFormulario = GlobalKey<FormState>();
 
   List<TextEditingController> controladores = List.generate(1, (contagem) => TextEditingController());

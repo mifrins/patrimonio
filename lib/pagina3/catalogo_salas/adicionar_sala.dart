@@ -1,11 +1,11 @@
-part of 'operacoes_salas.dart';
+part of 'catalogo_salas.dart';
 
-class ProcessoAdicionarSala extends StatefulWidget{
+class _AdicionarSala extends StatefulWidget{
   @override
-  State<ProcessoAdicionarSala> createState() => ProcessoAdicionarSalaState();
+  State<_AdicionarSala> createState() => _AdicionarSalaState();
 }
 
-class ProcessoAdicionarSalaState extends State<ProcessoAdicionarSala> {
+class _AdicionarSalaState extends State<_AdicionarSala> {
   final _keyFormulario = GlobalKey<FormState>();
 
   List<TextEditingController> controladores = List.generate(1, (contagem) => TextEditingController());

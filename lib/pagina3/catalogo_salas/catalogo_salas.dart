@@ -1,7 +1,17 @@
+
+library;
+
 import 'package:flutter/material.dart';
 import 'package:patrimonio/elementos_ui/genericos.dart';
 import '../operacoes_banco_de_dados.dart';
-import 'operacoes_salas.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../elementos_ui/formulario.dart';
+
+part 'adicionar_sala.dart';
+part 'renomear_sala.dart';
+part 'apagar_sala.dart';
+
+
 
 class CatalogoSalas extends StatefulWidget {
   const CatalogoSalas ({super.key});
@@ -37,7 +47,7 @@ class CatalogoSalasState extends State<CatalogoSalas> {
                       TextButton(
                         onPressed: (){
                           Navigator.pop(context, 'Renomear');
-                          Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoRenomearSala(salaEscolhida: sala,)));
+                          Navigator.push(context, MaterialPageRoute<void>(builder: (context) => _RenomearSala(salaEscolhida: sala,)));
                         },
                         child: const Text('Renomear'),
                       ),
@@ -45,7 +55,7 @@ class CatalogoSalasState extends State<CatalogoSalas> {
                       TextButton(
                         onPressed: (){
                           Navigator.pop(context, 'Apagar');
-                          Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoApagarSala(salaEscolhida: sala,)));
+                          Navigator.push(context, MaterialPageRoute<void>(builder: (context) => _ApagarSala(salaEscolhida: sala,)));
                         },
                         child: const Text('Apagar'),
                       ),
@@ -79,7 +89,7 @@ class CatalogoSalasState extends State<CatalogoSalas> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute<void>(builder: (context) => ProcessoAdicionarSala()));
+          Navigator.push(context, MaterialPageRoute<void>(builder: (context) => _AdicionarSala()));
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.add),

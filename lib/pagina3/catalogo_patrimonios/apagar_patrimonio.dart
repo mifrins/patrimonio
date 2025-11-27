@@ -1,14 +1,14 @@
-part of 'operacoes_patrimonio.dart';
+part of 'catalogo_patrimonios.dart';
 
-class ProcessoApagarPatrimonio extends StatefulWidget{
+class _ApagarPatrimonio extends StatefulWidget{
   final String nPatrimonioInicial;
   final bool fecharAposUso;
-  const ProcessoApagarPatrimonio({this.nPatrimonioInicial = '', this.fecharAposUso = false});
+  const _ApagarPatrimonio({this.nPatrimonioInicial = '', this.fecharAposUso = false});
   @override
-  State<ProcessoApagarPatrimonio> createState() => ProcessoApagarPatrimonioState();
+  State<_ApagarPatrimonio> createState() => _ApagarPatrimonioState();
 }
 
-class ProcessoApagarPatrimonioState extends State<ProcessoApagarPatrimonio> {
+class _ApagarPatrimonioState extends State<_ApagarPatrimonio> {
   final _keyFormulario = GlobalKey<FormState>();
 
   List<TextEditingController> controladores = [TextEditingController()];
